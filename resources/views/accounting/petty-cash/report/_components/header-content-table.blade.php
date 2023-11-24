@@ -1,0 +1,9 @@
+<tr>
+    <th>Tanggal</th>
+    <th>Nomor</th>
+    <th>Keterangan</th>
+    <th>Nominal</th>
+    <th>Debit</th>
+    <th>Kredit</th>
+    <th>Saldo</th>
+</tr>
