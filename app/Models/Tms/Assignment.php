@@ -25,7 +25,7 @@ class Assignment extends Model
 
     public function vehicle()
     {
-        return $this->hasOne(Vehicle::class, 'id', 'tms_vehicle_id');
+        return $this->belongsTo(Vehicle::class, 'tms_vehicle_id', 'id');
     }
 
     public function driver()

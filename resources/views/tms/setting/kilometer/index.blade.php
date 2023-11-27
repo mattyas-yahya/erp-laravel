@@ -47,7 +47,7 @@
                             <tbody>
                                 @forelse($kilometers as $item)
                                     <tr>
-                                        <td>{{ $item->vehicle->license_plate }}</td>
+                                        <td>{{ $item?->vehicle?->license_plate }}</td>
                                         <td>{{ $item->travel_date }}</td>
                                         <td>{{ $item->travel_kilometers }}</td>
                                         {{-- @canany('manage production') --}}

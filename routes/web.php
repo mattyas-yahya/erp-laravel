@@ -1751,7 +1751,25 @@ Route::prefix('tms')
                     function () {
                         Route::get('', 'index')->name('index');
                         Route::get('/create', 'create')->name('create');
-                        Route::get('/{id}', 'show')->name('show');
+
+                        // Vehicle Detail
+                        Route::prefix('/{id}/show')
+                            ->name('show.')
+                            ->controller(\App\Http\Controllers\Tms\VehicleDetailController::class)
+                            ->group(
+                                function () {
+                                    Route::get('/dashboard', 'dashboard')->name('dashboard');
+                                    Route::get('/detail', 'detail')->name('detail');
+                                    Route::get('/maintenance', 'maintenance')->name('maintenance');
+                                    Route::get('/maintenance/create', 'createMaintenance')->name('maintenance.create');
+                                    Route::get('/maintenance/{maintenanceId}/status-edit', 'editMaintenanceStatus')->name('maintenance.status.edit');
+                                    Route::get('/maintenance/{maintenanceId}', 'showMaintenance')->name('maintenance.show');
+
+                                    Route::post('/maintenance', 'storeMaintenanceRequest')->name('maintenance.store');
+                                    Route::put('/maintenance/{maintenanceId}/status-update', 'updateMaintenanceStatus')->name('maintenance.status.update');
+                                }
+                            );
+
                         Route::get('/{id}/edit', 'edit')->name('edit');
 
                         Route::post('/', 'store')->name('store');

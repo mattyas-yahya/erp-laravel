@@ -205,7 +205,7 @@ class PettyCashController extends Controller
         $journal->reference   = $pettyCash->petty_cash_number;
         $journal->description = $pettyCash->description;
         $journal->status = PettyCashStatusValue::STATUS_DONE;
-        $journal->created_by  = \Auth::user()->id;
+        $journal->created_by  = Auth::user()->id;
         $journal->save();
 
         foreach ($pettyCashDetails as $detail) {
@@ -233,7 +233,7 @@ class PettyCashController extends Controller
 
     private function journalNumber()
     {
-        $latest = JournalEntry::where('created_by', '=', \Auth::user()->creatorId())->latest()->first();
+        $latest = JournalEntry::where('created_by', '=', Auth::user()->creatorId())->latest()->first();
         if (!$latest) {
             return 1;
         }

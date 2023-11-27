@@ -10,6 +10,7 @@
                     <td>{{ $item->license_plate }}</td>
                     <td>{{ $item?->branch->name ?? 'Semua Cabang' }}</td>
                     <td>{{ $item->hull_number }}</td>
+                    <td>{{ $item?->owner?->name }}</td>
                     <td>{{ $item->active ? 'Aktif' : 'Tidak Aktif' }}</td>
                     <td>
                         <div class="action-btn bg-primary ms-2">
@@ -20,12 +21,12 @@
                                 data-ajax-popup="true" data-bs-toggle="tooltip">
                                 <i class="ti ti-pencil text-white"></i></a>
                         </div>
-                        <div class="action-btn bg-success ms-2">
-                            <a href="{{ route('tms.vehicle.show', $item->id) }}"
+                        <div class="action-btn bg-warning ms-2">
+                            <a href="{{ route('tms.vehicle.show.dashboard', $item->id) }}"
                                 title="{{ __('Detail') }}"
                                 class="mx-3 btn btn-sm align-items-center"
                                 data-bs-toggle="tooltip">
-                                <i class="ti ti-plus text-white"></i></a>
+                                <i class="ti ti-eye text-black"></i></a>
                         </div>
                         <div class="action-btn bg-danger ms-2">
                             {!! Form::open([

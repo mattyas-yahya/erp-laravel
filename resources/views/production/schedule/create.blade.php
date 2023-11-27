@@ -19,40 +19,34 @@
                 @endforeach
             </select>
         </div>
-
         <div class="form-group col-md-12">
             {!! Form::label('customer', __('Customer'), ['class' => 'form-label']) !!}
             {!! Form::text('customer', null, ['class' => 'form-control', 'readonly']) !!}
             {{ Form::hidden('customer_id', '') }}
         </div>
-
         <div class="col-md-6">
             <div class="form-group">
                 {{ Form::label('dimensions', __('Dimensions'), ['class' => 'form-label']) }}
                 {{ Form::text('dimensions', null, ['class' => 'form-control', 'readonly']) }}
             </div>
         </div>
-
         <div class="col-md-6">
             <div class="form-group">
                 {{ Form::label('coil_number', __('Coil Number'), ['class' => 'form-label']) }}
                 {{ Form::text('coil_number', null, ['class' => 'form-control', 'readonly']) }}
             </div>
         </div>
-
         <div class="col-md-6">
             <div class="form-group">
                 {{ Form::label('weight', __('Weight'), ['class' => 'form-label']) }}
                 {{ Form::text('weight', null, ['class' => 'form-control', 'readonly']) }}
             </div>
         </div>
-
         <div class="form-group col-lg-6 col-md-6">
             {{ Form::label('production_date', __('Production Date'), ['class' => 'form-label']) }} <span
                 class="text-danger">*</span>
             {{ Form::date('production_date', null, ['class' => 'form-control', 'required']) }}
         </div>
-
         <div class="form-group col-lg-6 col-md-6">
             {{ Form::label('machine_id', __('Machine'), ['class' => 'form-label']) }}
             <select class="form-control select2" name="machine_id" id="machine_id">

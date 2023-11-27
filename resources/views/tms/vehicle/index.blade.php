@@ -37,7 +37,3 @@
         </div>
     </div>
 @endsection
-
-@push('script-page')
-    <script></script>
-@endpush

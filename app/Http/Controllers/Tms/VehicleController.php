@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Tms\VehicleRequest as TmsVehicleRequest;
+use App\Models\Employee;
 
 class VehicleController extends Controller
 {
@@ -29,32 +30,12 @@ class VehicleController extends Controller
         //     return redirect()->back()->with('error', __('Permission Denied.'));
         // }
 
-        $vehicles = TmsVehicle::all();
+        $vehicles = TmsVehicle::with(['owner'])->get();
 
         return view('tms.vehicle.index', [
             'vehicles' => $vehicles,
         ]);
     }
-
-    function show($id)
-    {
-        // if (!Auth::user()->can('manage production')) {
-        //     return redirect()->back()->with('error', __('Permission Denied.'));
-        // }
-
-        $vehicle = TmsVehicle::findOrFail($id);
-        $vehiclePhysical = TmsVehiclePhysical::where('tms_vehicle_id', $id)->first();
-        $vehicleDocument = TmsVehicleDocument::where('tms_vehicle_id', $id)->first();
-        $assignments = TmsAssignment::with(['driver', 'details.customer'])->where('tms_vehicle_id', $id)->get();
-
-        return view('tms.vehicle.show', [
-            'vehicle' => $vehicle,
-            'vehiclePhysical' => $vehiclePhysical,
-            'vehicleDocument' => $vehicleDocument,
-            'assignments' => $assignments,
-        ]);
-    }
-
 
     function create()
     {
@@ -63,9 +44,11 @@ class VehicleController extends Controller
         // }
 
         $branches = Branch::all();
+        $employees = Employee::all();
 
         return view('tms.vehicle.create', [
             'branches' => $branches,
+            'employees' => $employees,
         ]);
     }
 
@@ -76,12 +59,14 @@ class VehicleController extends Controller
         // }
 
         $branches = Branch::all();
+        $employees = Employee::all();
         $vehicle = TmsVehicle::findOrFail($id);
         $vehiclePhysical = TmsVehiclePhysical::where('tms_vehicle_id', $id)->first();
         $vehicleDocument = TmsVehicleDocument::where('tms_vehicle_id', $id)->first();
 
         return view('tms.vehicle.edit', [
             'branches' => $branches,
+            'employees' => $employees,
             'vehicle' => $vehicle,
             'vehiclePhysical' => $vehiclePhysical,
             'vehicleDocument' => $vehicleDocument,
@@ -104,6 +89,7 @@ class VehicleController extends Controller
                 'hull_number' => $request->hull_number,
                 'license_plate' => $request->license_plate,
                 'image' => $imagePath,
+                'owner_id' => $request->owner_id,
                 'active' => !empty($request->active),
                 'inactive_reason' => $request->inactive_reason ?? '',
             ]);
@@ -118,7 +104,6 @@ class VehicleController extends Controller
                 'fuel_capacity' => $request->fuel_capacity,
                 'fuel_usage_ratio' => $request->fuel_usage_ratio,
                 'internal' => !empty($request->internal),
-                'vehicle_owner' => $request->vehicle_owner,
                 'manufacturer_year' => $request->manufacturer_year,
                 'start_operation_date' => $request->start_operation_date,
                 'spare_tire_capacity' => $request->spare_tire_capacity,
@@ -165,7 +150,7 @@ class VehicleController extends Controller
                 $imagePath = $this->uploadImage($request->file('image'));
                 $vehicle->image = $imagePath;
             }
-            
+
             $vehicle->save();
 
             $vehiclePhysical = TmsVehiclePhysical::where('tms_vehicle_id', $id)->first();
@@ -198,6 +183,8 @@ class VehicleController extends Controller
             $vehicle = TmsVehicle::find($id);
             $vehicle->physical()->delete();
             $vehicle->document()->delete();
+            // $vehicle->maintenances()->details()->delete();
+            $vehicle->maintenances()->delete();
             $vehicle->delete();
 
             DB::commit();

@@ -1387,7 +1387,18 @@
                 <!--------------------- Start TMS ----------------------------------->
                 {{-- @canany(['manage production']) --}}
                 <li
-                    class="dash-item dash-hasmenu {{ in_array(Request::route()->getName(), ['tms.vehicle.index']) ? ' active dash-trigger' : '' }}">
+                    class="dash-item dash-hasmenu {{ in_array(Request::route()->getName(), [
+                        'tms.vehicle.index',
+                        'tms.vehicle.show.dashboard',
+                        'tms.vehicle.show.maintenance',
+                        'tms.vehicle.show.maintenance.create',
+                        'tms.assignment.index',
+                        'tms.delivery-schedule.index',
+                        'tms.setting.ownership.index',
+                        'tms.setting.kilometer.index',
+                        'tms.setting.vehicle-factory.index',
+                        'tms.setting.tire-factory.index',
+                    ]) ? ' active dash-trigger' : '' }}">
                     <a href="#!" class="dash-link">
                         <span class="dash-micon">
                             <i class="ti ti-car"></i>
@@ -1397,10 +1408,22 @@
                         </span>
                     </a>
                     <ul
-                        class="dash-submenu {{ in_array(Request::route()->getName(), ['tms.vehicle.index', 'tms.assignment.index', 'tms.delivery-schedule.index']) ? 'show' : '' }}">
+                        class="dash-submenu {{ in_array(Request::route()->getName(), [
+                            'tms.vehicle.index',
+                            'tms.vehicle.show.dashboard',
+                            'tms.vehicle.show.maintenance',
+                            'tms.vehicle.show.maintenance.create',
+                            'tms.assignment.index',
+                            'tms.delivery-schedule.index'
+                        ]) ? 'show' : '' }}">
                         {{-- @can('manage production') --}}
                         <li
-                            class="dash-item {{ in_array(Request::route()->getName(), ['tms.vehicle.index']) ? ' active' : '' }}">
+                            class="dash-item {{ in_array(Request::route()->getName(), [
+                                'tms.vehicle.index',
+                                'tms.vehicle.show.dashboard',
+                                'tms.vehicle.show.maintenance',
+                                'tms.vehicle.show.maintenance.create',
+                            ]) ? ' active' : '' }}">
                             <a class="dash-link" href="{{ route('tms.vehicle.index') }}">{{ __('Vehicle') }}</a>
                         </li>
                         <li
@@ -1414,7 +1437,12 @@
                                 href="{{ route('tms.delivery-schedule.index') }}">Jadwal Kirim</a>
                         </li>
                         <li
-                            class="dash-item {{ in_array(Request::route()->getName(), ['tms.setting.ownership.index']) ? ' active' : '' }}">
+                            class="dash-item {{ in_array(Request::route()->getName(), [
+                                'tms.setting.ownership.index',
+                                'tms.setting.kilometer.index',
+                                'tms.setting.vehicle-factory.index',
+                                'tms.setting.tire-factory.index',
+                            ]) ? ' active' : '' }}">
                             <a class="dash-link"
                                 href="{{ route('tms.setting.ownership.index') }}">Pengaturan TMS</a>
                         </li>
