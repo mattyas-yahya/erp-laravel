@@ -93,11 +93,11 @@
                     <hr />
                     <div class="row mb-1">
                         <div class="col-4">Jenis Perawatan</div>
-                        <div class="col-8">{{ $vehicleMaintenances->name }}</div>
+                        <div class="col-8">{{ $vehicleMaintenances?->name ?? '-' }}</div>
                     </div>
                     <div class="row mb-1">
                         <div class="col-4">Tanggal</div>
-                        <div class="col-8">{{ \Auth::user()->dateFormat($vehicleMaintenances->planned_at) }}</div>
+                        <div class="col-8">{{ !empty($vehicleMaintenances->planned_at) ? \Auth::user()->dateFormat($vehicleMaintenances->planned_at) : '-' }}</div>
                     </div>
                 </div>
 

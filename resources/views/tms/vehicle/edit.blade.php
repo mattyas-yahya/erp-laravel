@@ -37,7 +37,7 @@
             {!! Form::text('license_plate', null, ['class' => 'form-control', 'required']) !!}
         </div>
         <div class="form-group col-md-6">
-            {!! Form::label('owner_id', __('Pemilik Kendaraan'), ['class' => 'form-label']) !!}
+            {!! Form::label('owner_id', __('Pemilik Kendaraan'), ['class' => 'form-label', 'required']) !!}
             <select class="form-control select2" name="owner_id" id="employee-options">
                 <option value=""></option>
                 @foreach ($employees as $employee)
@@ -61,7 +61,7 @@
         </div>
         <div class="form-group col-md-6">
             {!! Form::label('inactive_reason', __('Alasan Tidak Aktif'), ['class' => 'form-label']) !!}
-            {!! Form::text('inactive_reason', null, ['class' => 'form-control', 'required']) !!}
+            {!! Form::text('inactive_reason', null, ['class' => 'form-control']) !!}
         </div>
     </div>
     <hr />
