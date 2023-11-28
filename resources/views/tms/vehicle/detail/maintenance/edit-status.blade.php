@@ -5,10 +5,10 @@
             <div class="form-group">
                 {{ Form::label('status', __('Status'), ['class' => 'form-label']) }}
                 <select class="form-control select2" name="status" id="status" placeholder="Select Status" required>
-                    <option value="SUBMISSION" @if ($vehicleMaintenance->status == 'SUBMISSION') selected @endif>Submission</option>
-                    <option value="PLAN" @if ($vehicleMaintenance->status == 'PLAN') selected @endif>Plan</option>
-                    <option value="MAINTENANCE" @if ($vehicleMaintenance->status == 'MAINTENANCE') selected @endif>Maintenance</option>
-                    <option value="FINISHED" @if ($vehicleMaintenance->status == 'FINISHED') selected @endif>Finished</option>
+                    <option value="SUBMISSION" @if ($vehicleMaintenance->status == 'SUBMISSION') selected @endif>Pengajuan</option>
+                    <option value="PLAN" @if ($vehicleMaintenance->status == 'PLAN') selected @endif>Rencana</option>
+                    <option value="MAINTENANCE" @if ($vehicleMaintenance->status == 'MAINTENANCE') selected @endif>Perawatan</option>
+                    <option value="FINISHED" @if ($vehicleMaintenance->status == 'FINISHED') selected @endif>Selesai</option>
                 </select>
             </div>
         </div>

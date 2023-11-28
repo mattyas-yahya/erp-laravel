@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Tms;
 
 use App\Http\Controllers\Controller;
 use App\Models\Branch;
+use App\Models\Vender;
 use App\Models\Tms\Vehicle as TmsVehicle;
 use App\Models\Tms\VehiclePhysical as TmsVehiclePhysical;
 use App\Models\Tms\VehicleDocument as TmsVehicleDocument;
@@ -12,7 +13,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Tms\VehicleRequest as TmsVehicleRequest;
-use App\Models\Employee;
 
 class VehicleController extends Controller
 {
@@ -44,11 +44,11 @@ class VehicleController extends Controller
         // }
 
         $branches = Branch::all();
-        $employees = Employee::all();
+        $venders = Vender::all();
 
         return view('tms.vehicle.create', [
             'branches' => $branches,
-            'employees' => $employees,
+            'venders' => $venders,
         ]);
     }
 
@@ -59,14 +59,14 @@ class VehicleController extends Controller
         // }
 
         $branches = Branch::all();
-        $employees = Employee::all();
+        $venders = Vender::all();
         $vehicle = TmsVehicle::findOrFail($id);
         $vehiclePhysical = TmsVehiclePhysical::where('tms_vehicle_id', $id)->first();
         $vehicleDocument = TmsVehicleDocument::where('tms_vehicle_id', $id)->first();
 
         return view('tms.vehicle.edit', [
             'branches' => $branches,
-            'employees' => $employees,
+            'venders' => $venders,
             'vehicle' => $vehicle,
             'vehiclePhysical' => $vehiclePhysical,
             'vehicleDocument' => $vehicleDocument,
@@ -86,6 +86,7 @@ class VehicleController extends Controller
 
             $vehicle = TmsVehicle::create([
                 'branch_id' => $request->branch_id,
+                'type' => $request->type,
                 'hull_number' => $request->hull_number,
                 'license_plate' => $request->license_plate,
                 'image' => $imagePath,

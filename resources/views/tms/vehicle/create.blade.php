@@ -40,8 +40,8 @@
             {!! Form::label('owner_id', __('Pemilik Kendaraan'), ['class' => 'form-label', 'required']) !!}
             <select class="form-control select2" name="owner_id" id="employee-options">
                 <option value=""></option>
-                @foreach ($employees as $employee)
-                    <option value="{{ $employee->id }}">{{ $employee->name }}</option>
+                @foreach ($venders as $vender)
+                    <option value="{{ $vender->id }}">{{ $vender->name }}</option>
                 @endforeach
             </select>
         </div>

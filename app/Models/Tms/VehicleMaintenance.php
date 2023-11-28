@@ -51,7 +51,7 @@ class VehicleMaintenance extends Model
             'SUBMISSION' => 'Pengajuan',
             'PLAN' => 'Rencana',
             'MAINTENANCE' => 'Perawatan',
-            'DONE' => 'Selesai',
+            'FINISHED' => 'Selesai',
         ];
 
         return Attribute::make(

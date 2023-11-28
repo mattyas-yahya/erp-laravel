@@ -7,8 +7,9 @@
     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
     <li class="breadcrumb-item">TMS</li>
     <li class="breadcrumb-item"><a href="{{ route('tms.vehicle.index') }}">{{ __('Kendaraan') }}</a></li>
-    <li class="breadcrumb-item">{{ $vehicle->license_plate }}</li>
     <li class="breadcrumb-item">Detail</li>
+    <li class="breadcrumb-item">Perawatan</li>
+    <li class="breadcrumb-item">Tambah</li>
 @endsection
 
 @push('script-page')
