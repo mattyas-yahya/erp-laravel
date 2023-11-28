@@ -37,8 +37,8 @@
             {!! Form::text('license_plate', null, ['class' => 'form-control', 'required']) !!}
         </div>
         <div class="form-group col-md-6">
-            {!! Form::label('owner_id', __('Pemilik Kendaraan'), ['class' => 'form-label', 'required']) !!}
-            <select class="form-control select2" name="owner_id" id="employee-options">
+            {!! Form::label('owner_id', __('Pemilik Kendaraan'), ['class' => 'form-label']) !!}
+            <select class="form-control select2" name="owner_id" id="vender-options" required>
                 <option value=""></option>
                 @foreach ($venders as $vender)
                     <option value="{{ $vender->id }}" @if ($vehicle->owner_id == $vender->id) selected @endif>{{ $vender->name }}</option>
