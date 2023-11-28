@@ -127,6 +127,7 @@ class VehicleController extends Controller
 
             return redirect()->route('tms.vehicle.index')->with('success', __('Vehicle successfully created.'));
         } catch (\Throwable $e) {
+            dd($e);
             DB::rollBack();
 
             return redirect()->back()->with('error', 'Tambah data gagal!');

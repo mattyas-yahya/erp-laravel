@@ -3,7 +3,7 @@
 namespace App\Models\Tms;
 
 use App\Models\Branch;
-use App\Models\Employee;
+use App\Models\Vender;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -32,7 +32,7 @@ class Vehicle extends Model
 
     public function owner()
     {
-        return $this->hasOne(Employee::class, 'id', 'owner_id');
+        return $this->hasOne(Vender::class, 'id', 'owner_id');
     }
 
     public function physical()
