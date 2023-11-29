@@ -13,7 +13,6 @@ class Vehicle extends Model
 
     protected $table = 'tms_vehicles';
 
-
     protected $fillable = [
         'branch_id',
         'type',

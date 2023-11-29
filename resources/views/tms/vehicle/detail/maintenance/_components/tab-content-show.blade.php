@@ -76,7 +76,6 @@
                                             <th>Qty Realisasi</th>
                                             <th>Harga Realisasi</th>
                                             <th>Total Realisasi</th>
-                                            <th>Rencana Biaya</th>
                                         </tr>
                                     </thead>
 

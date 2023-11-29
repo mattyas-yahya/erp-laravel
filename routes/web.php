@@ -1759,14 +1759,18 @@ Route::prefix('tms')
                             ->group(
                                 function () {
                                     Route::get('/dashboard', 'dashboard')->name('dashboard');
-                                    Route::get('/detail', 'detail')->name('detail');
+                                    Route::get('/detail/files', 'vehicleFilesDetail')->name('detail.files');
+                                    Route::get('/detail/files/create', 'createVehicleFilesDetail')->name('detail.files.create');
                                     Route::get('/maintenance', 'maintenance')->name('maintenance');
                                     Route::get('/maintenance/create', 'createMaintenance')->name('maintenance.create');
                                     Route::get('/maintenance/{maintenanceId}/status-edit', 'editMaintenanceStatus')->name('maintenance.status.edit');
+                                    Route::get('/maintenance/{maintenanceId}/realization', 'editMaintenanceRealization')->name('maintenance.realization');
                                     Route::get('/maintenance/{maintenanceId}', 'showMaintenance')->name('maintenance.show');
 
+                                    Route::post('/detail/files', 'storeVehicleFilesDetail')->name('detail.files.store');
                                     Route::post('/maintenance', 'storeMaintenanceRequest')->name('maintenance.store');
                                     Route::put('/maintenance/{maintenanceId}/status-update', 'updateMaintenanceStatus')->name('maintenance.status.update');
+                                    Route::put('/maintenance/{maintenanceId}/update', 'updateMaintenance')->name('maintenance.update');
                                 }
                             );
 

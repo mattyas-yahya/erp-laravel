@@ -4,7 +4,7 @@
         <div class="col-12">
             <div class="form-group">
                 {{ Form::label('status', __('Status'), ['class' => 'form-label']) }}
-                <select class="form-control select2" name="status" id="status" placeholder="Select Status" required>
+                <select class="form-control" name="status" id="status" placeholder="Select Status" required>
                     <option value="SUBMISSION" @if ($vehicleMaintenance->status == 'SUBMISSION') selected @endif>Pengajuan</option>
                     <option value="PLAN" @if ($vehicleMaintenance->status == 'PLAN') selected @endif>Rencana</option>
                     <option value="MAINTENANCE" @if ($vehicleMaintenance->status == 'MAINTENANCE') selected @endif>Perawatan</option>

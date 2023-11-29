@@ -5,7 +5,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a href="{{ route('tms.vehicle.show.detail', ['id' => $vehicle->id]) }}" class="nav-link {{ in_array(Request::route()->getName(), ['tms.vehicle.show.detail']) ? ' active' : '' }}"  id="pills-tab-detail">
+        <a href="{{ route('tms.vehicle.show.detail.files', ['id' => $vehicle->id]) }}" class="nav-link {{ in_array(Request::route()->getName(), ['tms.vehicle.show.detail.files']) ? ' active' : '' }}"  id="pills-tab-detail">
             <i class="fas fa-tags"></i> Detail
         </a>
     </li>

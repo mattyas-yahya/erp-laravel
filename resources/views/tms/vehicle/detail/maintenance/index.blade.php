@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('page-title')
-    TMS Detail Perawatan Kendaraan
+    TMS Detail - Perawatan
 @endsection
 
 @section('breadcrumb')

@@ -33,7 +33,7 @@
                                                 <td>{{ \Auth::user()->priceFormat($item->planned_cost) }}</td>
                                                 <td>{{ !empty($item->realized_at) ? \Auth::user()->dateFormat($item->realized_at) : '-' }}
                                                 </td>
-                                                <td>{{ $item->realized_cost ?? '-' }}</td>
+                                                <td>{{ !empty($item->realized_cost) ? \Auth::user()->priceFormat($item->realized_cost) : '-' }}</td>
                                                 <td>
                                                     <div class="action-btn bg-warning ms-2">
                                                         <a href="{{ route('tms.vehicle.show.maintenance.show', ['id' => $vehicle->id, 'maintenanceId' => $item->id]) }}"
@@ -50,8 +50,15 @@
                                                             data-url="{{ route('tms.vehicle.show.maintenance.status.edit', ['id' => $vehicle->id, 'maintenanceId' => $item->id]) }}"
                                                             data-size="sm" data-ajax-popup="true"
                                                             data-bs-toggle="tooltip">
-                                                            <i class="ti ti-pencil text-white"></i>
+                                                            <i class="ti ti-status-change text-white"></i>
                                                         </a>
+                                                    </div>
+                                                    <div class="action-btn bg-primary ms-2">
+                                                        <a href="{{ route('tms.vehicle.show.maintenance.realization', ['id' => $vehicle->id, 'maintenanceId' => $item->id]) }}"
+                                                            title="{{ __('Input Realisasi') }}"
+                                                            class="mx-3 btn btn-sm align-items-center"
+                                                            data-bs-toggle="tooltip">
+                                                            <i class="ti ti-pencil text-white"></i>
                                                     </div>
                                                 </td>
                                             </tr>

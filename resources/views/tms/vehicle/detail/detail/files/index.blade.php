@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('page-title')
-    TMS Detail - Dashboard
+    TMS Detail - Detail Kendaraan
 @endsection
 
 @section('breadcrumb')
@@ -8,7 +8,7 @@
     <li class="breadcrumb-item">TMS</li>
     <li class="breadcrumb-item"><a href="{{ route('tms.vehicle.index') }}">{{ __('Kendaraan') }}</a></li>
     <li class="breadcrumb-item">Detail</li>
-    <li class="breadcrumb-item">Dashboard</li>
+    <li class="breadcrumb-item">Detail</li>
 @endsection
 
 @push('script-page')
@@ -19,8 +19,8 @@
         @include('tms.vehicle.detail._components.tabs')
 
         <div class="tab-content">
-            <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel" aria-labelledby="pills-tab-dashboard">
-                @include('tms.vehicle.detail.dashboard._components.tab-content-index')
+            <div class="tab-pane fade show active" id="tab-detail" role="tabpanel" aria-labelledby="pills-tab-detail">
+                @include('tms.vehicle.detail.detail._components.tab-content-files')
             </div>
         </div>
     </div>
