@@ -101,7 +101,7 @@ class VehicleDetailController extends Controller
 
             DB::commit();
 
-            return redirect()->route('tms.vehicle.show.detail.files', ['id' => $id])->with('success', __('Vehicle file successfully created.'));
+            return redirect()->route('tms.vehicle.show.detail.files.index', ['id' => $id])->with('success', __('Vehicle file successfully created.'));
         } catch (\Throwable $e) {
             dd($e);
             DB::rollBack();
@@ -126,7 +126,7 @@ class VehicleDetailController extends Controller
 
             DB::commit();
 
-            return redirect()->route('tms.vehicle.show.detail.files', ['id' => $id])->with('success', __('Vehicle file successfully created.'));
+            return redirect()->route('tms.vehicle.show.detail.files.index', ['id' => $id])->with('success', __('Vehicle file successfully created.'));
         } catch (\Throwable $e) {
             dd($e);
             DB::rollBack();
@@ -232,7 +232,7 @@ class VehicleDetailController extends Controller
 
             DB::commit();
 
-            return redirect()->route('tms.vehicle.show.maintenance', ['id' => $id, 'status' => 'submission'])->with('success', __('Vehicle maintenance successfully created.'));
+            return redirect()->route('tms.vehicle.show.maintenance.index', ['id' => $id, 'status' => 'submission'])->with('success', __('Vehicle maintenance successfully created.'));
         } catch (\Throwable $e) {
             DB::rollBack();
 
@@ -268,7 +268,7 @@ class VehicleDetailController extends Controller
 
             DB::commit();
 
-            return redirect()->route('tms.vehicle.show.maintenance', ['id' => $id, 'status' => 'submission'])->with('success', __('Vehicle maintenance status successfully updated.'));
+            return redirect()->route('tms.vehicle.show.maintenance.index', ['id' => $id, 'status' => 'submission'])->with('success', __('Vehicle maintenance status successfully updated.'));
         } catch (\Throwable $e) {
             dd($e);
             return redirect()->back()->with(['error' => 'Update data gagal!']);
@@ -334,7 +334,7 @@ class VehicleDetailController extends Controller
 
             DB::commit();
 
-            return redirect()->route('tms.vehicle.show.maintenance', ['id' => $id, 'status' => 'submission'])->with('success', __('Vehicle maintenance realization successfully added.'));
+            return redirect()->route('tms.vehicle.show.maintenance.index', ['id' => $id, 'status' => 'submission'])->with('success', __('Vehicle maintenance realization successfully added.'));
         } catch (\Throwable $e) {
             dd($e);
             return redirect()->back()->with(['error' => 'Update data gagal!']);

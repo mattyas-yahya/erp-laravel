@@ -58,7 +58,8 @@
                                                             title="{{ __('Input Realisasi') }}"
                                                             class="mx-3 btn btn-sm align-items-center"
                                                             data-bs-toggle="tooltip">
-                                                            <i class="ti ti-pencil text-white"></i>
+                                                            <i class="ti ti-plus text-white"></i>
+                                                        </a>
                                                     </div>
                                                 </td>
                                             </tr>

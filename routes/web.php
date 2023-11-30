@@ -1751,30 +1751,60 @@ Route::prefix('tms')
                     function () {
                         Route::get('', 'index')->name('index');
                         Route::get('/create', 'create')->name('create');
+                        Route::get('/{id}/edit', 'edit')->name('edit');
 
                         // Vehicle Detail
                         Route::prefix('/{id}/show')
                             ->name('show.')
-                            ->controller(\App\Http\Controllers\Tms\VehicleDetailController::class)
                             ->group(
                                 function () {
-                                    Route::get('/dashboard', 'dashboard')->name('dashboard');
-                                    Route::get('/detail/files', 'vehicleFilesDetail')->name('detail.files');
-                                    Route::get('/detail/files/create', 'createVehicleFilesDetail')->name('detail.files.create');
-                                    Route::get('/maintenance', 'maintenance')->name('maintenance');
-                                    Route::get('/maintenance/create', 'createMaintenance')->name('maintenance.create');
-                                    Route::get('/maintenance/{maintenanceId}/status-edit', 'editMaintenanceStatus')->name('maintenance.status.edit');
-                                    Route::get('/maintenance/{maintenanceId}/realization', 'editMaintenanceRealization')->name('maintenance.realization');
-                                    Route::get('/maintenance/{maintenanceId}', 'showMaintenance')->name('maintenance.show');
+                                    // Dashboard
+                                    Route::prefix('/dashboard')
+                                        ->name('dashboard.')
+                                        ->controller(\App\Http\Controllers\Tms\VehicleDetailDashboardController::class)
+                                        ->group(
+                                            function () {
+                                                Route::get('', 'index')->name('index');
 
-                                    Route::post('/detail/files', 'storeVehicleFilesDetail')->name('detail.files.store');
-                                    Route::post('/maintenance', 'storeMaintenanceRequest')->name('maintenance.store');
-                                    Route::put('/maintenance/{maintenanceId}/status-update', 'updateMaintenanceStatus')->name('maintenance.status.update');
-                                    Route::put('/maintenance/{maintenanceId}/update', 'updateMaintenance')->name('maintenance.update');
+                                            }
+                                        );
+
+
+                                    // Detail
+                                    // File
+                                    Route::prefix('/detail/files')
+                                        ->name('detail.files.')
+                                        ->controller(\App\Http\Controllers\Tms\VehicleDetailFileController::class)
+                                        ->group(
+                                            function () {
+                                                Route::get('', 'index')->name('index');
+                                                Route::get('/create', 'create')->name('create');
+                                                Route::get('/{fileId}/edit', 'edit')->name('edit');
+
+                                                Route::post('', 'store')->name('store');
+                                                Route::put('/{fileId}/update', 'update')->name('update');
+                                                Route::delete('/{fileId}', 'destroy')->name('destroy');
+                                            }
+                                        );
+
+                                    Route::prefix('/maintenance')
+                                        ->name('maintenance.')
+                                        ->controller(\App\Http\Controllers\Tms\VehicleDetailMaintenanceController::class)
+                                        ->group(
+                                            function () {
+                                                Route::get('', 'index')->name('index');
+                                                Route::get('/create', 'create')->name('create');
+                                                Route::get('/{maintenanceId}/status-edit', 'editStatus')->name('status.edit');
+                                                Route::get('/{maintenanceId}/realization', 'editRealization')->name('realization');
+                                                Route::get('/{maintenanceId}', 'show')->name('show');
+
+                                                Route::post('', 'storeRequest')->name('store');
+                                                Route::put('/{maintenanceId}/status-update', 'updateStatus')->name('status.update');
+                                                Route::put('/{maintenanceId}/update', 'update')->name('update');
+                                            }
+                                        );
                                 }
                             );
-
-                        Route::get('/{id}/edit', 'edit')->name('edit');
 
                         Route::post('/', 'store')->name('store');
                         Route::put('/{id}', 'update')->name('update');

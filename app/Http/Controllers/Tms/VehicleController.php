@@ -212,10 +212,11 @@ class VehicleController extends Controller
 
             DB::commit();
 
-            return redirect()->route('tms.vehicle.show', [
+            return redirect()->route('tms.vehicle.show.dashboard.index', [
                 'id' => $id
             ])->with('success', __('Vehicle successfully activated.'));
         } catch (\Throwable $e) {
+            dd($e);
             DB::rollBack();
 
             return redirect()->back()->with('error', 'Update data gagal!');
@@ -237,7 +238,7 @@ class VehicleController extends Controller
 
             DB::commit();
 
-            return redirect()->route('tms.vehicle.show', [
+            return redirect()->route('tms.vehicle.show.dashboard.index', [
                 'id' => $id
             ])->with('success', __('Vehicle successfully deactivated.'));
         } catch (\Throwable $e) {

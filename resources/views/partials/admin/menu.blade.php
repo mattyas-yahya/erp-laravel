@@ -1389,8 +1389,8 @@
                 <li
                     class="dash-item dash-hasmenu {{ in_array(Request::route()->getName(), [
                         'tms.vehicle.index',
-                        'tms.vehicle.show.dashboard',
-                        'tms.vehicle.show.maintenance',
+                        'tms.vehicle.show.dashboard.index',
+                        'tms.vehicle.show.maintenance.index',
                         'tms.vehicle.show.maintenance.create',
                         'tms.assignment.index',
                         'tms.delivery-schedule.index',
@@ -1410,8 +1410,8 @@
                     <ul
                         class="dash-submenu {{ in_array(Request::route()->getName(), [
                             'tms.vehicle.index',
-                            'tms.vehicle.show.dashboard',
-                            'tms.vehicle.show.maintenance',
+                            'tms.vehicle.show.dashboard.index',
+                            'tms.vehicle.show.maintenance.index',
                             'tms.vehicle.show.maintenance.create',
                             'tms.assignment.index',
                             'tms.delivery-schedule.index'
@@ -1420,8 +1420,8 @@
                         <li
                             class="dash-item {{ in_array(Request::route()->getName(), [
                                 'tms.vehicle.index',
-                                'tms.vehicle.show.dashboard',
-                                'tms.vehicle.show.maintenance',
+                                'tms.vehicle.show.dashboard.index',
+                                'tms.vehicle.show.maintenance.index',
                                 'tms.vehicle.show.maintenance.create',
                             ]) ? ' active' : '' }}">
                             <a class="dash-link" href="{{ route('tms.vehicle.index') }}">{{ __('Vehicle') }}</a>

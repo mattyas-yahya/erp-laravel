@@ -25,33 +25,10 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-lg-2 col-md-12">
-                                <a href="{{ route('tms.vehicle.show.maintenance.create', ['id' => $vehicle->id]) }}" title="{{ __('Tambah Perawatan') }}" data-title="Tambah Perawatan" data-url="#"
-                                    data-size="lg" data-bs-toggle="tooltip" class="btn btn-sm btn-primary">
-                                    <i class="ti ti-plus"></i> Tambah Perawatan
-                                </a>
-
-                                <div class="card" style="top:30px">
-                                    <div class="list-group list-group-flush">
-                                        <a href="{{ route('tms.vehicle.show.maintenance', ['id' => $vehicle->id, 'status' => 'request']) }}"
-                                            class="list-group-item list-group-item-action border-0 {{ Request::route()->getName() == 'tms.vehicle.show.maintenance' && Request::get('status') == 'request' ? ' active' : '' }}">Pengajuan
-                                            <div class="float-end"><span class="badge bg-dark">0</span></div>
-                                        </a>
-                                        <a href="{{ route('tms.vehicle.show.maintenance', ['id' => $vehicle->id, 'status' => 'plan']) }}"
-                                            class="list-group-item list-group-item-action border-0 {{ Request::route()->getName() == 'tms.vehicle.show.maintenance' && Request::get('status') == 'plan' ? ' active' : '' }}">Rencana
-                                            <div class="float-end"><span class="badge bg-dark">0</span></div>
-                                        </a>
-                                        <a href="{{ route('tms.vehicle.show.maintenance', ['id' => $vehicle->id, 'status' => 'maintenance']) }}"
-                                            class="list-group-item list-group-item-action border-0 {{ Request::route()->getName() == 'tms.vehicle.show.maintenance' && Request::get('status') == 'maintenance' ? ' active' : '' }}">Perawatan
-                                            <div class="float-end"><span class="badge bg-dark">0</span></div>
-                                        </a>
-                                        <a href="{{ route('tms.vehicle.show.maintenance', ['id' => $vehicle->id, 'status' => 'finished']) }}"
-                                            class="list-group-item list-group-item-action border-0 {{ Request::route()->getName() == 'tms.vehicle.show.maintenance' && Request::get('status') == 'finished' ? ' active' : '' }}">Selesai
-                                            <div class="float-end"><span class="badge bg-dark">0</span></div>
-                                        </a>
-                                    </div>
-                                </div>
+                                @include('tms.vehicle.detail.maintenance._components.tabs')
                             </div>
-                            <div class="col-lg-10 col-md-12 p-4">
+                            <div class="col-lg-10 col-md-12 px-4">
+                                <h3 class="mb-5">Tambah Perawatan</h3>
                                 {{ Form::open(['route' => ['tms.vehicle.show.maintenance.store', $vehicle->id], 'method' => 'POST']) }}
                                     <div class="row">
                                         <div class="form-group col-6">

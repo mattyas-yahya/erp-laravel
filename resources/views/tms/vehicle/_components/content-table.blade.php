@@ -22,7 +22,7 @@
                                 <i class="ti ti-pencil text-white"></i></a>
                         </div>
                         <div class="action-btn bg-warning ms-2">
-                            <a href="{{ route('tms.vehicle.show.dashboard', $item->id) }}"
+                            <a href="{{ route('tms.vehicle.show.dashboard.index', $item->id) }}"
                                 title="{{ __('Detail') }}"
                                 class="mx-3 btn btn-sm align-items-center"
                                 data-bs-toggle="tooltip">
