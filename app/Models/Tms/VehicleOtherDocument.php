@@ -5,32 +5,28 @@ namespace App\Models\Tms;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class VehicleMaintenance extends Model
+class VehicleOtherDocument extends Model
 {
     use HasFactory;
 
-    protected $table = 'tms_vehicle_maintenances';
+    protected $table = 'tms_vehicle_detail_documents';
 
     protected $fillable = [
         'tms_vehicle_id',
         'name',
-        'context_type',
-        'date',
         'vendor',
         'planned_at',
-        'planned_kilometers',
         'planned_cost',
-        'realized_at',
-        'realized_kilometers',
-        'realized_cost',
+        'context_type',
         'status',
         'note',
     ];
 
-    public function details()
+    public function details(): HasMany
     {
-        return $this->hasMany(VehicleMaintenanceDetail::class, 'tms_vehicle_maintenance_id', 'id');
+        return $this->hasMany(VehicleOtherDocumentDetail::class, 'tms_vehicle_detail_document_id', 'id');
     }
 
     protected function contextTypeText(): Attribute
@@ -50,7 +46,7 @@ class VehicleMaintenance extends Model
         $texts = [
             'SUBMISSION' => 'Pengajuan',
             'PLAN' => 'Rencana',
-            'MAINTENANCE' => 'Perawatan',
+            'DOCUMENT' => 'Document',
             'FINISHED' => 'Selesai',
         ];
 

@@ -28,7 +28,7 @@
                                 @include('tms.vehicle.detail.maintenance._components.tabs')
                             </div>
                             <div class="col-lg-10 col-md-12 px-4">
-                                <h3 class="mb-5">Tambah Perawatan</h3>
+                                <h4 class="mb-5">Tambah Perawatan</h4>
                                 {{ Form::open(['route' => ['tms.vehicle.show.maintenance.store', $vehicle->id], 'method' => 'POST']) }}
                                     <div class="row">
                                         <div class="form-group col-6">
@@ -72,19 +72,14 @@
                                             {!! Form::text('vendor', null, ['class' => 'form-control', 'required']) !!}
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row mb-5">
                                         <div class="form-group col-md-6">
                                             {!! Form::label('note', __('Keterangan'), ['class' => 'form-label']) !!}
                                             {!! Form::text('note', null, ['class' => 'form-control', 'required']) !!}
                                         </div>
                                     </div>
 
-                                    <br />
-                                    <br />
-
-                                    <h6>Detail</h6>
-                                    <br />
-                                    <br />
+                                    <h6 class="mb-3">Detail</h6>
 
                                     <div class="row">
                                         <div class="float-end ms-2">

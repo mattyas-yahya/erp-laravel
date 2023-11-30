@@ -216,7 +216,7 @@ class VehicleDetailController extends Controller
             $payload = collect([]);
             foreach ($request->detail_category as $key => $value) {
                 $payload->push([
-                    'tms_vehicle_maintenance_detail_id' => $vehicleMaintenance->id,
+                    'tms_vehicle_maintenance_id' => $vehicleMaintenance->id,
                     'name' => $request->detail_name[$key] ?? '',
                     'part_number' => '', // TODO: gak jelas screenshotnya
                     'category' => $request->detail_category[$key],
@@ -283,7 +283,7 @@ class VehicleDetailController extends Controller
 
         $vehicle = TmsVehicle::findOrFail($id);
         $vehicleMaintenance = TmsVehicleMaintenance::findOrFail($maintenanceId);
-        $vehicleMaintenanceDetails = TmsVehicleMaintenanceDetail::where('tms_vehicle_maintenance_detail_id', $vehicleMaintenance->id)->get();
+        $vehicleMaintenanceDetails = TmsVehicleMaintenanceDetail::where('tms_vehicle_maintenance_id', $vehicleMaintenance->id)->get();
 
         $vehicleMaintenancesSubmissionCount = TmsVehicleMaintenance::where('tms_vehicle_id', $id)
                                                 ->where('status', 'SUBMISSION')
@@ -349,7 +349,7 @@ class VehicleDetailController extends Controller
 
         $vehicle = TmsVehicle::findOrFail($id);
         $vehicleMaintenance = TmsVehicleMaintenance::findOrFail($maintenanceId);
-        $vehicleMaintenanceDetails = TmsVehicleMaintenanceDetail::where('tms_vehicle_maintenance_detail_id', $vehicleMaintenance->id)->get();
+        $vehicleMaintenanceDetails = TmsVehicleMaintenanceDetail::where('tms_vehicle_maintenance_id', $vehicleMaintenance->id)->get();
 
         $vehicleMaintenancesSubmissionCount = TmsVehicleMaintenance::where('tms_vehicle_id', $id)
                                                 ->where('status', 'SUBMISSION')

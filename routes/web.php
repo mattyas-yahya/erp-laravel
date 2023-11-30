@@ -1769,9 +1769,8 @@ Route::prefix('tms')
                                             }
                                         );
 
-
                                     // Detail
-                                    // File
+                                    // -> File
                                     Route::prefix('/detail/files')
                                         ->name('detail.files.')
                                         ->controller(\App\Http\Controllers\Tms\VehicleDetailFileController::class)
@@ -1787,6 +1786,7 @@ Route::prefix('tms')
                                             }
                                         );
 
+                                    // Maintenance
                                     Route::prefix('/maintenance')
                                         ->name('maintenance.')
                                         ->controller(\App\Http\Controllers\Tms\VehicleDetailMaintenanceController::class)
@@ -1794,6 +1794,7 @@ Route::prefix('tms')
                                             function () {
                                                 Route::get('', 'index')->name('index');
                                                 Route::get('/create', 'create')->name('create');
+                                                Route::get('/{maintenanceId}/edit', 'edit')->name('edit');
                                                 Route::get('/{maintenanceId}/status-edit', 'editStatus')->name('status.edit');
                                                 Route::get('/{maintenanceId}/realization', 'editRealization')->name('realization');
                                                 Route::get('/{maintenanceId}', 'show')->name('show');
@@ -1801,6 +1802,29 @@ Route::prefix('tms')
                                                 Route::post('', 'storeRequest')->name('store');
                                                 Route::put('/{maintenanceId}/status-update', 'updateStatus')->name('status.update');
                                                 Route::put('/{maintenanceId}/update', 'update')->name('update');
+                                                Route::put('/{maintenanceId}/update-realization', 'updateRealization')->name('realization.update');
+                                                Route::delete('/{maintenanceId}', 'destroy')->name('destroy');
+                                            }
+                                        );
+
+                                    // Document
+                                    Route::prefix('/document')
+                                        ->name('document.')
+                                        ->controller(\App\Http\Controllers\Tms\VehicleDetailDocumentController::class)
+                                        ->group(
+                                            function () {
+                                                Route::get('', 'index')->name('index');
+                                                Route::get('/create', 'create')->name('create');
+                                                Route::get('/{documentId}/edit', 'edit')->name('edit');
+                                                Route::get('/{documentId}/status-edit', 'editStatus')->name('status.edit');
+                                                // Route::get('/{documentId}/realization', 'editRealization')->name('realization');
+                                                Route::get('/{documentId}', 'show')->name('show');
+
+                                                Route::post('', 'storeRequest')->name('store');
+                                                Route::put('/{documentId}/status-update', 'updateStatus')->name('status.update');
+                                                Route::put('/{documentId}/update', 'update')->name('update');
+                                                // Route::put('/{documentId}/update-realization', 'updateRealization')->name('realization.update');
+                                                Route::delete('/{documentId}', 'destroy')->name('destroy');
                                             }
                                         );
                                 }

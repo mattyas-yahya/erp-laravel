@@ -13,7 +13,7 @@ class VehicleMaintenanceDetail extends Model
 
 
     protected $fillable = [
-        'tms_vehicle_maintenance_detail_id',
+        'tms_vehicle_maintenance_id',
         'name',
         'part_number',
         'category',

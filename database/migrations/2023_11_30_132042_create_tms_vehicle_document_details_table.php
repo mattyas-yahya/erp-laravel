@@ -13,19 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tms_vehicle_maintenance_details', function (Blueprint $table) {
+        Schema::create('tms_vehicle_detail_document_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('tms_vehicle_maintenance_id');
+            $table->unsignedBigInteger('tms_vehicle_detail_document_id');
             $table->string('name');
-            $table->string('part_number');
             $table->string('category');
             $table->string('activity_type');
-            $table->string('planned_quantity');
-            $table->string('planned_cost');
-            $table->string('planned_cost_total');
-            $table->string('realized_quantity')->nullable();
-            $table->string('realized_cost')->nullable();
-            $table->string('realized_cost_total')->nullable();
+            $table->integer('quantity');
+            $table->decimal('price', 16, 2)->default(0.0);
             $table->timestamps();
         });
     }
@@ -37,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tms_vehicle_maintenance_details');
+        Schema::dropIfExists('tms_vehicle_document_details');
     }
 };

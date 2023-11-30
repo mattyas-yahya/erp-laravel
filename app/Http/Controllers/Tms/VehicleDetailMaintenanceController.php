@@ -52,6 +52,24 @@ class VehicleDetailMaintenanceController extends Controller
         ];
     }
 
+    function show($id, $maintenanceId)
+    {
+        // if (!Auth::user()->can('manage production')) {
+        //     return redirect()->back()->with('error', __('Permission Denied.'));
+        // }
+
+        $vehicle = TmsVehicle::findOrFail($id);
+        $vehicleMaintenance = TmsVehicleMaintenance::findOrFail($maintenanceId);
+        $vehicleMaintenanceDetails = TmsVehicleMaintenanceDetail::where('tms_vehicle_maintenance_id', $vehicleMaintenance->id)->get();
+
+        return view('tms.vehicle.detail.maintenance.show', [
+            'vehicle' => $vehicle,
+            'vehicleMaintenance' => $vehicleMaintenance,
+            'vehicleMaintenanceDetails' => $vehicleMaintenanceDetails,
+            ...$this->countTabs,
+        ]);
+    }
+
     function index(Request $request, $id)
     {
         // if (!Auth::user()->can('manage production')) {
@@ -117,7 +135,7 @@ class VehicleDetailMaintenanceController extends Controller
             $payload = collect([]);
             foreach ($request->detail_category as $key => $value) {
                 $payload->push([
-                    'tms_vehicle_maintenance_detail_id' => $vehicleMaintenance->id,
+                    'tms_vehicle_maintenance_id' => $vehicleMaintenance->id,
                     'name' => $request->detail_name[$key] ?? '',
                     'part_number' => '', // TODO: gak jelas screenshotnya
                     'category' => $request->detail_category[$key],
@@ -138,6 +156,68 @@ class VehicleDetailMaintenanceController extends Controller
             DB::rollBack();
 
             return redirect()->back()->with('error', 'Tambah data gagal!');
+        }
+    }
+
+    function edit($id, $maintenanceId)
+    {
+        // if (!Auth::user()->can('manage production')) {
+        //     return redirect()->back()->with('error', __('Permission Denied.'));
+        // }
+
+        $vehicle = TmsVehicle::findOrFail($id);
+        $vehicleMaintenance = TmsVehicleMaintenance::findOrFail($maintenanceId);
+        $vehicleMaintenanceDetails = TmsVehicleMaintenanceDetail::where('tms_vehicle_maintenance_id', $vehicleMaintenance->id)->get();
+
+        return view('tms.vehicle.detail.maintenance.edit', [
+            'vehicle' => $vehicle,
+            'vehicleMaintenance' => $vehicleMaintenance,
+            'vehicleMaintenanceDetails' => $vehicleMaintenanceDetails,
+            ...$this->countTabs,
+        ]);
+    }
+
+    function update(Request $request, $id, $maintenanceId)
+    {
+        // if (!Auth::user()->can('manage production')) {
+        //     return redirect()->back()->with('error', __('Permission Denied.'));
+        // }
+
+        // dd($request->all());
+
+        try {
+            DB::beginTransaction();
+
+            $vehicleMaintenance = TmsVehicleMaintenance::findOrFail($maintenanceId);
+            $vehicleMaintenance->fill($request->all());
+            $vehicleMaintenance->save();
+
+            $payload = collect([]);
+            foreach ($request->detail_category as $key => $value) {
+                $payload->push([
+                    'tms_vehicle_maintenance_id' => $maintenanceId,
+                    'name' => $request->detail_name[$key] ?? '',
+                    'part_number' => '', // TODO: gak jelas screenshotnya
+                    'category' => $request->detail_category[$key],
+                    'activity_type' => $request->detail_activity_type[$key],
+                    // 'bin_location' => $request->detail_bin_location[$key] ?? '', // TODO: gak jelas screenshotnya
+                    'planned_quantity' => $request->detail_planned_quantity[$key],
+                    'planned_cost' => $request->detail_planned_cost[$key],
+                    'planned_cost_total' => (int) $request->detail_planned_quantity[$key] * (int) $request->detail_planned_cost[$key],
+                ]);
+            }
+
+            $vehicleMaintenanceDetails = TmsVehicleMaintenanceDetail::where('tms_vehicle_maintenance_id', $maintenanceId);
+            $vehicleMaintenanceDetails->delete();
+
+            TmsVehicleMaintenanceDetail::insert($payload->toArray());
+
+            DB::commit();
+
+            return redirect()->route('tms.vehicle.show.maintenance.index', ['id' => $id, 'status' => 'submission'])->with('success', __('Vehicle maintenance successfully updated.'));
+        } catch (\Throwable $e) {
+            dd($e);
+            return redirect()->back()->with(['error' => 'Update data gagal!']);
         }
     }
 
@@ -184,7 +264,7 @@ class VehicleDetailMaintenanceController extends Controller
 
         $vehicle = TmsVehicle::findOrFail($id);
         $vehicleMaintenance = TmsVehicleMaintenance::findOrFail($maintenanceId);
-        $vehicleMaintenanceDetails = TmsVehicleMaintenanceDetail::where('tms_vehicle_maintenance_detail_id', $vehicleMaintenance->id)->get();
+        $vehicleMaintenanceDetails = TmsVehicleMaintenanceDetail::where('tms_vehicle_maintenance_id', $vehicleMaintenance->id)->get();
 
         return view('tms.vehicle.detail.maintenance.realization', [
             'vehicle' => $vehicle,
@@ -226,21 +306,26 @@ class VehicleDetailMaintenanceController extends Controller
         }
     }
 
-    function show($id, $maintenanceId)
+    function destroy($id, $maintenanceId)
     {
         // if (!Auth::user()->can('manage production')) {
         //     return redirect()->back()->with('error', __('Permission Denied.'));
         // }
 
-        $vehicle = TmsVehicle::findOrFail($id);
-        $vehicleMaintenance = TmsVehicleMaintenance::findOrFail($maintenanceId);
-        $vehicleMaintenanceDetails = TmsVehicleMaintenanceDetail::where('tms_vehicle_maintenance_detail_id', $vehicleMaintenance->id)->get();
+        try {
+            DB::beginTransaction();
 
-        return view('tms.vehicle.detail.maintenance.show', [
-            'vehicle' => $vehicle,
-            'vehicleMaintenance' => $vehicleMaintenance,
-            'vehicleMaintenanceDetails' => $vehicleMaintenanceDetails,
-            ...$this->countTabs,
-        ]);
+            $vehicleMaintenance = TmsVehicleMaintenance::findOrFail($maintenanceId);
+            $vehicleMaintenanceDetail = TmsVehicleMaintenanceDetail::where('tms_vehicle_maintenance_id', $maintenanceId);
+            $vehicleMaintenanceDetail->delete();
+            $vehicleMaintenance->delete();
+
+            DB::commit();
+
+            return redirect()->route('tms.vehicle.show.maintenance.index', ['id' => $id, 'status' => 'submission'])->with('success', __('Vehicle maintenance successfully deleted.'));
+        } catch (\Throwable $e) {
+            dd($e);
+            return redirect()->back()->with(['error' => 'Delete data gagal!']);
+        }
     }
 }

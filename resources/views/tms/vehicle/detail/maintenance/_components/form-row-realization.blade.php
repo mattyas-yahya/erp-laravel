@@ -1,7 +1,6 @@
 <div class="form-row">
     <div class="row">
         {!! Form::hidden('detail_id[]', $item->id) !!}
-
         <div class="form-group col-2">
             {!! Form::label('detail_category', 'Jenis Perawatan', ['class' => 'form-label']) !!}
             {!! Form::text('detail_category[]', $item->category, ['class' => 'form-control', 'disabled']) !!}

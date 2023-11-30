@@ -233,7 +233,7 @@ class PettyCashController extends Controller
 
     private function journalNumber()
     {
-        $latest = JournalEntry::where('created_by', '=', Auth::user()->creatorId())->latest()->first();
+        $latest = JournalEntry::where('created_by', '=', \Auth::user()->creatorId())->latest()->first();
         if (!$latest) {
             return 1;
         }
