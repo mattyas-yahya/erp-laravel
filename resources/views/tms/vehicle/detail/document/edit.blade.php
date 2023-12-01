@@ -29,7 +29,7 @@
                                 @include('tms.vehicle.detail.document._components.tabs')
                             </div>
                             <div class="col-lg-10 col-md-12 px-4">
-                                <h4 class="mb-5">Edit Perawatan</h4>
+                                <h4 class="mb-5">Edit Dokumen</h4>
                                 {{ Form::model($vehicleOtherDocument, ['route' => ['tms.vehicle.show.document.update', $vehicle->id, $vehicleOtherDocument->id], 'method' => 'PUT']) }}
                                 <div class="row">
                                     <div class="form-group col-6">

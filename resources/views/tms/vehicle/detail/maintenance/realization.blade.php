@@ -59,7 +59,7 @@
                                     <div class="row">
                                         <div class="form-group col-md-6">
                                             {!! Form::label('vendor', __('Vendor'), ['class' => 'form-label']) !!}
-                                            {!! Form::text('vendor', null, ['class' => 'form-control', 'required']) !!}
+                                            {!! Form::text('vendor', $vehicleMaintenance->vendor, ['class' => 'form-control', 'disabled']) !!}
                                         </div>
                                     </div>
                                     <div class="row">
